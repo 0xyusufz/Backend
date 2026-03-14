@@ -25,5 +25,8 @@ app.delete("/notes/:id",(req,res)=>{
 // patch
 app.patch("/notes/:id",(req,res)=>{
     notes[req.params.id].desc= req.body.desc
+    res.status(200).json({
+        message:"notes updated successfully"
+    })
 })
 module.exports = app
