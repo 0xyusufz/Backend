@@ -1,17 +1,19 @@
 const app = require("./src/app")
 const mongoose = require("mongoose")
-
+const url = require("./src/Database/link")
 async function connectDB(){
     try{
-        await mongoose.connect("mongodb+srv://yusuf:Yusuffatah%4009@cluster0.zypo3og.mongodb.net/day-6")
-        console.log("connected to database")
+        await mongoose.connect(url)
+        console.log("database successfully connected")
     }catch(e){
-        console.log("failed to connect with database")
+        console.log("error while connecting database")
     }
 }
 connectDB()
-port =3000
-app.listen(port,()=>{
-    console.log(`this server is running at port ${port}`)
-})
 
+
+
+const PORT =3000
+app.listen(PORT,()=>{
+    console.log(`This Server is running at port ${PORT} `)
+})
