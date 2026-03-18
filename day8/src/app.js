@@ -1,7 +1,8 @@
 const express = require("express")
-const noteModel= require("./models/notes.model")
-const app =express()   //instance of a express
-app.use(express.json())
+const noteModel = require("./models/notes.model")
+const app = express()   //instance of the express
+app.use(express.json()) //middleware
+
 
 app.post("/notes",async(req,res)=>{
     const {title,description} = req.body
@@ -9,17 +10,27 @@ app.post("/notes",async(req,res)=>{
         title,description
     })
     res.status(201).json({
-        message:"notes created successfully",
+        message: "note created successfully",
         note
     })
 })
 
-app.get("/notes",async (req,res)=>{
-    const allNotes = await noteModel.find()
+app.get("/notes",async(req,res)=>{
+    const notes = await noteModel.find()
     res.status(200).json({
         message:"all notes fetched successfully",
-        allNotes
+        notes
     })
 })
 
-module.exports =app 
+
+app.delete("/notes/:id",async(req,res)=>{
+    const id=req.params.id
+    const note = await noteModel.findByIdAndDelete(id)
+    res.status(200).json({
+        message:"notes deleted successfully",
+        note
+    })
+})
+
+module.exports = app 
