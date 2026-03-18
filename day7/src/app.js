@@ -17,5 +17,10 @@ app.post("/notes",async(req,res)=>{
 })
 //  creating get API
 app.get("/notes",async(req,res)=>{
+    const note = await noteModel.find()
+    res.status(200).json({
+        message:"all data fetched successfully",
+        note
+    })
 })
 module.exports =app //exporting app to server to run
