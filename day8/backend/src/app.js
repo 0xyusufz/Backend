@@ -1,51 +1,51 @@
 const express = require("express")
-const noteModel = require("./models/notes.model")
-const app = express()  // intance of the express
-app.use(express.json())   // middle ware
+const noteModel = require("../models/notes.model")
+const cors = require("cors")
+const app = express()  //instance of the express
+app.use(express.json())   //middleware
+app.use(cors())
 
-// post api
+// post method
 app.post("/api/notes",async(req,res)=>{
     const {title,description} = req.body
-    const note = await noteModel.create({
+    const note =await noteModel.create({
         title,description
     })
     res.status(201).json({
-        message:"note created successfuly",
+        message:"notes created successfully",
         note
     })
 })
 
-// get api
-app.get("/api/notes",async (req,res)=>{
-    const allNotes = await noteModel.find()
+
+// get method
+app.get("/api/notes",async(req,res)=>{
+    const notes = await noteModel.find()
     res.status(200).json({
-        message: "fetched all notes",
-        allNotes
+        notes
     })
 })
 
-// delete
+// delete method
 
-app.delete("/api/notes/:id",async(req,res)=>{
+app.delete("/api/notes/:id", async(req,res)=>{
     const id = req.params.id
-    const deleteNote = await noteModel.findByIdAndDelete(id)
+    const deletedNotes =await noteModel.findByIdAndDelete(id)
     res.status(200).json({
-        message:"note deleted successfully",
-        deleteNote
+        message:"notes successfully deleted",
+        deletedNotes
     })
 })
 
-//  patch
+// patch method
 
 app.patch("/api/notes/:id",async(req,res)=>{
     const id = req.params.id
     const {description} = req.body
-    const updatedNotes = await noteModel.findByIdAndUpdate(id,{description})
+    const updatedNotes =await noteModel.findByIdAndUpdate(id,{description})
     res.status(200).json({
-        message:"description update successfully",
+        message:"description updated successfully",
         updatedNotes
     })
 })
-module.exports = app
-
-
+module.exports = app   //exporting to server.js
