@@ -8,13 +8,6 @@ html,body,#root{
     width: 100%;
 }
 
-.notes{
-  width: 100%;
-  padding: 3rem;
-  display: flex;
-  gap: 40px;
-}
-.note{
-  padding: 20px;
-  background-color: yellow;
+#root{
+  background-color: rgb(60, 59, 59);
 }

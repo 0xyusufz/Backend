@@ -1,14 +1,15 @@
 const express = require("express")
-const noteModel = require("../models/notes.model")
 const cors = require("cors")
-const app = express()  //instance of the express
-app.use(express.json())   //middleware
-app.use(cors())
+const noteModel = require("./models/notes.model")
+const app = express()   //instance of the express
+app.use(express.json())  //middleware
+app.use(cors())  // cross request api
+
 
 // post method
 app.post("/api/notes",async(req,res)=>{
-    const {title,description} = req.body
-    const note =await noteModel.create({
+    const {title,description}=req.body
+    const note = await noteModel.create({
         title,description
     })
     res.status(201).json({
@@ -17,23 +18,23 @@ app.post("/api/notes",async(req,res)=>{
     })
 })
 
-
 // get method
+
 app.get("/api/notes",async(req,res)=>{
-    const notes = await noteModel.find()
+    const allNotes = await noteModel.find()
     res.status(200).json({
-        notes
+        message:"all notes fetched",
+        allNotes
     })
 })
 
 // delete method
 
-app.delete("/api/notes/:id", async(req,res)=>{
+app.delete("/api/notes/:id",async(req,res)=>{
     const id = req.params.id
-    const deletedNotes =await noteModel.findByIdAndDelete(id)
+    await noteModel.findByIdAndDelete(id)
     res.status(200).json({
-        message:"notes successfully deleted",
-        deletedNotes
+        message:"notes deleted successfully"
     })
 })
 
@@ -41,11 +42,11 @@ app.delete("/api/notes/:id", async(req,res)=>{
 
 app.patch("/api/notes/:id",async(req,res)=>{
     const id = req.params.id
-    const {description} = req.body
-    const updatedNotes =await noteModel.findByIdAndUpdate(id,{description})
+    const {title,description}= req.body
+    await noteModel.findByIdAndUpdate(id,{title,description})
     res.status(200).json({
-        message:"description updated successfully",
-        updatedNotes
+        message:"note updated successfully"
     })
 })
-module.exports = app   //exporting to server.js
+
+module.exports = app

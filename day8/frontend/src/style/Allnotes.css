@@ -1,0 +1,79 @@
+.allNotes{
+    height: 100%;
+    width: 100%;
+    background-color:rgb(114, 106, 106);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.note-title{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.note-title h1{
+    font-size: 5rem;
+    letter-spacing: 2rem;
+    font-family: monospace;
+}
+.notes-area{
+    height: 100%;
+    width: 70%;
+
+    overflow-x: scroll;
+
+}
+::-webkit-scrollbar {
+    display: none;
+  }
+
+.notes{
+    width: 100%;
+    height: 20%;
+
+    border-bottom: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: .5rem;
+
+
+}
+.back-btn{
+    position: absolute;
+    right: 2%;
+    top: 1%;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+.dlt-btn{
+    font-size: .7rem;
+    font-weight: 900;
+    padding: .3rem .6rem;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    transition: all ease-in-out .2s;
+    cursor: pointer;
+}
+.dlt-btn:hover{
+    scale: 1.1;
+    transition: all ease-in-out .2s;
+}
+.btnss{
+    display: flex;
+    gap: 2rem;
+}
