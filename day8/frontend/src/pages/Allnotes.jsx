@@ -5,13 +5,13 @@ import "../style/Allnotes.css";
 import axios from "axios";
 const Allnotes = () => {
   const [editingid, seteditingid] = useState(null);
-  const [titles, settitles] = useState("")
-  const [descriptions, setdescriptions] = useState("")
-  const handleeditClick =(elem)=>{
-    seteditingid(elem._id)
-    settitles(elem.title)
-    setdescriptions(elem.description)
-  }
+  const [titles, settitles] = useState("");
+  const [descriptions, setdescriptions] = useState("");
+  const handleeditClick = (elem) => {
+    seteditingid(elem._id);
+    settitles(elem.title);
+    setdescriptions(elem.description);
+  };
   const { data, fetchData, setdata } = useContext(useNoteContext);
   const deleteHandler = async (id) => {
     try {
@@ -22,20 +22,20 @@ const Allnotes = () => {
       alert("failed to  delete note, try again later");
     }
   };
-  const updateHandler = async ()=>{
-    try{
-      await axios.patch(`http://localhost:3000/api/notes/${editingid}`,{
-        title:titles,
-        description:descriptions
-      })
-      alert("notes edited successfully")
-      seteditingid(null)
-      fetchData()
-    }catch(e){
-      alert("failed to edit notes")
-      seteditingid(null)
+  const updateHandler = async () => {
+    try {
+      await axios.patch(`http://localhost:3000/api/notes/${editingid}`, {
+        title: titles,
+        description: descriptions,
+      });
+      alert("notes edited successfully");
+      seteditingid(null);
+      fetchData();
+    } catch (e) {
+      alert("failed to edit notes");
+      seteditingid(null);
     }
-  }
+  };
   return (
     <div className="allNotes">
       <Link className="back-btn" to={"/"}>
@@ -49,11 +49,35 @@ const Allnotes = () => {
           <div className="notes" key={elem._id}>
             {editingid === elem._id ? (
               <>
-                <input defaultValue={elem.title} className="uni" onChange={(e)=>{settitles(e.target.value)}}/>
-                <input defaultValue={elem.description} className="uni" onChange={(e)=>{setdescriptionse.target.value}}/>
+                <input
+                  defaultValue={elem.title}
+                  className="uni"
+                  onChange={(e) => {
+                    settitles(e.target.value);
+                  }}
+                />
+                <input
+                  defaultValue={elem.description}
+                  className="uni"
+                  onChange={(e) => {
+                    setdescriptionse.target.value;
+                  }}
+                />
                 <div className="btnss">
-                <button onClick={() => seteditingid(null)} className="dlt-btn">Cancel</button>
-                <button className="dlt-btn" onClick={()=>{updateHandler(elem._id)}}>Confirm</button>
+                  <button
+                    onClick={() => seteditingid(null)}
+                    className="dlt-btn"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="dlt-btn"
+                    onClick={() => {
+                      updateHandler(elem._id);
+                    }}
+                  >
+                    Confirm
+                  </button>
                 </div>
               </>
             ) : (
@@ -67,7 +91,6 @@ const Allnotes = () => {
                   >
                     Edit
                   </button>
-
                   <button
                     className="dlt-btn"
                     onClick={() => deleteHandler(elem._id)}
